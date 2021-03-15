@@ -7,6 +7,20 @@
     <title>Práctica Arrays</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- El style es para la animacion que se realiza al reproducir
+    la playlist, no se me ocurrio otra forma -->
+    <style>
+    .inicio{
+      width: 0%;
+    }
+    .final{
+      width: 100%;
+    }
+    .animacion {
+      transition: all 3s ease .5s;
+    }
+    </style>
 </head>
 <body>
 
@@ -19,16 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="process.php?action=stop">Borrar session</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link active" aria-current="page" href="process.php?action=stop">Borrar Playlist</a>
         </li>
       </ul>
     </div>

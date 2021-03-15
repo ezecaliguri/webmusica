@@ -1,27 +1,7 @@
 <?php 
-
-session_start();
 include_once "templates/cabecera.php";
-include_once "data/data.php";
+include_once "funciones/global/conexion.php";
 
-if(!$_SESSION['artistas']) {
-    require_once('data/data.php');
-    $_SESSION['artistas'] = $artistas;
-} else {
-    $artistas = $_SESSION['artistas'];
-}
-if(!$_SESSION['usuarios']) {
-    require_once('data/data.php');
-    $_SESSION['usuarios'] = $usuarios;
-} else {
-    $usuarios = $_SESSION['usuarios'];
-}
-if(!$_SESSION['empresas']) {
-    require_once('data/data.php');
-    $_SESSION['empresas'] = $empresas;
-} else {
-    $empresas = $_SESSION['empresas'];
-}
 ?>
 
  
@@ -32,48 +12,57 @@ if(!$_SESSION['empresas']) {
         <div class=" navbar-light bg-light">
             <div class="d-flex bd-highlight">
                 <a class="navbar-brand p-2  bd-highlight text-primary" href="index.php?menu=artistas">Artista</a>
-                <a class="navbar-brand p-2  bd-highlight text-success" href="index.php?menu=empresas">Empresa</a>
-                <a class="navbar-brand p-2 flex-grow-1 bd-highlight text-danger" href="index.php?menu=usuarios">Usuario</a>            
+                <a class="navbar-brand p-2  bd-highlight text-success" href="index.php?menu=temas">Temas</a>
+                <a class="navbar-brand p-2 flex-grow-1 bd-highlight text-danger" href="index.php?menu=playlist">Playlist</a>            
                 <a class="btn btn-info mt-2 mr-2  bd-highlight" href="index.php?menu=agregar">Agregar</a>
             </div>
 
             <?php 
+
+                // recorre todos los botones de la pagina a traves de GET
+
                 if(isset($_GET["menu"])){
                     $opcion = $_GET["menu"];
                     switch ($opcion){
 
                         case "artistas": 
-                            include "menu/artistas.php";
+                            include "menu/visual/artistas.php";
                             break;
-                        case "usuarios": 
-                            include "menu/usuarios.php";
+                        case "playlist": 
+                            include "menu/visual/playlist.php";
                             break;
-                        case "empresas": 
-                            include "menu/empresas.php";
+                        case "temas": 
+                            include "menu/visual/temas.php";
                             break;
-                        case "agregar":
-
-                            
+                        case "agregar":                            
                             if (empty($_GET["option"])){ 
-                                include "insertar/options.php";
+                                include "tipoCuenta/options.php";
                             } else {
                                 $opcion = $_GET["option"];
                                 switch ($opcion){
                                     case "artista": 
-                                        include "insertar/add_artista.php";
+                                        include "tipoCuenta/artistas/add_artista.php";
                                         break;
-                                    case "empresa":
-                                        include "insertar/add_empresa.php";
-                                        break;
-                                    case "usuario":
-                                        include "insertar/add_usuario.php";
+                                    case "tema":
+                                        include "tipoCuenta/temas/add_tema.php";
                                         break;
                                 }
                             }
                             break;
+                        case ("reproducir"): 
+                            include "menu/visual/reproductor.php";
+                            break;
+                        case ("editar"):
+                            $opcion = $_GET["option"];
+                            switch ($opcion) {
+                                case ("artista"):
+                                    include "tipoCuenta/artistas/edit_artista.php";
+                                    break;
+                                
+                            }
                     }
                 } else {
-                    include "menu/default.php";
+                    include "menu/visual/default.php";
                 }
             ?>
             

@@ -7,6 +7,7 @@
     <div class="container border pt-4  alert alert-success ">
         <form class="row g-3 needs-validation " action="process.php" name="add_artista" method="POST">
         <input type="hidden" name="action" value="artista">
+        <input type="hidden" name="task" value="add">
 
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">Nombre</label>
@@ -14,14 +15,9 @@
             
         </div>
 
-        <div class="col-md-4 position-relative">
-            <label for="validationTooltip02" class="form-label">Apellido</label>
-            <input type="text" class="form-control" id="apellido" name="apellido"  required>
-            
-        </div>
 
         <div class="col-md-9 text-left mt-2">
-            <label for="formFile" class="form-label">Ingresar la imagen en formato URL &nbsp;&nbsp; </label>
+            <label for="formFile" class="form-label">Ingrese su imagen en formato URL &nbsp;&nbsp; </label>
             <span>
                 <a href="https://www.youtube.com/watch?v=9VPbdPDXI0Q" class="input-text text-nowrap" target="_blank"> ¿Como lo hago?</a>
             </span>
@@ -31,13 +27,13 @@
         </div>
 
         <div class="col-md-6 position-relative">
-            <label class="form-label">Email del Artista | Empresa representante</label>
+            <label class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
 
         <div class="col-6 position-relative">
-            <label class="form-label">Ingrese web del Artista</label>
+            <label class="form-label">Ingrese su sitio web</label>
             <input type="url" class="form-control" name="url" id="url" required>
         </div>
 
