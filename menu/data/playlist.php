@@ -1,8 +1,7 @@
 <?php 
-include_once "menu/data/clases/entity.php";
 include_once "funciones/global/conexion.php";
 
-class Playlist extends Entity{
+class Playlist {
 
     // elimina un tema de la session
 
@@ -10,10 +9,13 @@ class Playlist extends Entity{
         foreach($_SESSION["playlist"] as $key => $temas){
             if($temas["id"] == $id){
                 unset($_SESSION["playlist"][$key]);
-                
+                $playlist = $_SESSION["playlist"];              
                 break;
             }
         }
+        unset($_SESSION["playlist"]);
+        $_SESSION["playlist"] = $playlist;
+        return $_SESSION["playlist"];
     }
 
     // asigna un nuevo tema a la playlist

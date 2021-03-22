@@ -1,4 +1,4 @@
-<?php include "menu/data/clases/artista.php";  ?>
+<?php include "menu/data/basedatos.php";  ?>
 <div class="p-4">
 
     <div class="container p-4 alert-success text-center ">
@@ -7,8 +7,8 @@
 
     <?php 
         $id = $_GET["id"];
-        $buscar = new Artista();
-        $listaArtistas = $buscar->__get("mostrarLista");
+        $buscar = new BaseDatos();
+        $listaArtistas = $buscar->__get("artistas");
         foreach ($listaArtistas as $key => $artista){
             if($id == $key){
     ?>

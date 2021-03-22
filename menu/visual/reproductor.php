@@ -1,4 +1,5 @@
 <?php 
+    sort($_SESSION["playlist"]);
     $listaPlaylist = $_SESSION["playlist"];
     
 ?>

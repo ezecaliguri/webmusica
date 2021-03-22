@@ -1,5 +1,6 @@
 <?php 
 include "process.php";
+// include "menu/data/playlist.php";
 ?>
 
 <?php 
@@ -26,11 +27,11 @@ include "process.php";
         <tr>
             <div class="card-img-top p-2">
 
-            <td class="text-center"><?= $temasplaylist["nombre"];?></td>
-            <td class="text-center"><?= round($temasplaylist["duracion"] / 60) . " MIN";?></td>               
-            <td class="text-center"><?= $temasplaylist["popularidad"];?></td>                
-            <td class="text-center"><?= $temasplaylist["explicidad"];?></td>                
-            <td class="text-center"><?= $temasplaylist["idArtista"];?></td>                
+            <td class="text-center align-middle"><?= $temasplaylist["nombre"];?></td>
+            <td class="text-center align-middle"><?= round($temasplaylist["duracion"] / 60) . " MIN";?></td>               
+            <td class="text-center align-middle"><?= $temasplaylist["popularidad"];?></td>                
+            <td class="text-center align-middle"><?= $temasplaylist["explicidad"];?></td>                
+            <td class="text-center align-middle"><?= $temasplaylist["idArtista"];?></td>                
             
             
             <td class="text-center">

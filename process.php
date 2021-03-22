@@ -1,7 +1,7 @@
 <?php 
-include "menu/data/clases/artista.php";
-include "menu/data/clases/playlist.php";
-include "menu/data/clases/temas.php";
+include "menu/data/playlist.php";
+include "menu/data/basedatos.php";
+include "funciones/redirecion.php";
 
 
 if(isset($_POST["action"]) || isset($_GET["action"])){
@@ -27,9 +27,11 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $email = $_POST["email"];
                     $url = $_POST["url"];
 
-                    $new = new Artista();
-                    $new->set_new_artista($nombre,$email,$imagen,$url);
-                    $new->return_index();
+                    $nuevo = [$nombre,$email,$imagen,$url];
+
+                    $new = new BaseDatos();
+                    $new->__set("agregarArtista",$nuevo);
+                    Redirecciones::header("index");               
 
                     break;
                 // recibe los datos cambiados del formulario del artista
@@ -40,9 +42,10 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $email = $_POST["email"];
                     $url = $_POST["url"];
 
-                    $new = new Artista();
-                    $new->set_edit_artista($id,$nombre,$email,$imagen,$url);
-                    $new->return_index();
+                    $cambio = [$id,$nombre,$email,$imagen,$url];
+                    $editar = new BaseDatos();
+                    $editar->__set("editarArtista",$cambio);
+                    Redirecciones::header("artistas");
                     break;
                 
             }
@@ -66,7 +69,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
 
                     $new = new Playlist();
                     $new->set_playlist($id,$nombre,$duracion,$popularidad,$explicidad,$artista);
-                    $new->temas_index();
+                    Redirecciones::header("temas");
                     break;
                 
                 case ("del"): 
@@ -74,6 +77,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $id = $_POST["id"];
                     $borrar = new Playlist();
                     $borrar->eliminarTemaPlaylist($id);
+                    Redirecciones::header("playlist");
                     break;
             }
             
@@ -82,7 +86,8 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
             $task = $_POST["task"];
             switch ($task){
                 // Agrega un tema nuevo a la bd recibiendo los formularios
-                case ("add"):                    
+                case ("add"):
+
                     $nombre = $_POST["nombre"];
                     $duracion = $_POST["duracion"];
                     $popularidad = $_POST["popularidad"];
@@ -90,10 +95,25 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     // la idea era que reciba un dato especifico de la llave primaria, pero 
                     // por falta de tiempo se cambio
                     $idArtista = $_POST["idArtista"];
+                    
+                    $nuevo = [$nombre,$duracion,$popularidad,$explicidad,$idArtista];
 
-                    $new = new Temas();
-                    $new->set_new_tema($nombre,$duracion,$popularidad,$explicidad,$idArtista);
-                    $new->return_index();
+                    $new = new BaseDatos();
+                    $new->__set("agregarTema",$nuevo);
+                    Redirecciones::header("index");
+                    break;
+                case ("edit"):
+                    $id = $_POST["id"];
+                    $nombre = $_POST["nombre"];
+                    $duracion = $_POST["duracion"];
+                    $popularidad = $_POST["popularidad"];
+                    $explicidad = $_POST["explicidad"];
+                    $idArtista = $_POST["idArtista"];
+
+                    $cambio = [$id,$nombre,$duracion,$popularidad,$explicidad,$idArtista];
+                    $editar = new BaseDatos();
+                    $editar->__set("editarTema",$cambio);
+                    Redirecciones::header("temas");
                     break;
             }
             break;
@@ -106,24 +126,24 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case ("stop"):
             // Destruye la $_SESSION 
             session_destroy();
-            $new = new Entity ();
-            $new->return_index();
+            Redirecciones::header("index");
             break;
+
         case ("borrar"):
             // elimina registros de la bd
             $opcion = $_GET["opcion"];
             switch($opcion){
                 case ("artistas"):
                     $id = $_GET["id"];
-                    $new = new Artista();
-                    $new->del_artista($id);
-                    $new->return_index();
+                    $borrar = new BaseDatos();
+                    $borrar->__set("eliminarArtista",$id);
+                    Redirecciones::header("artistas");
                     break;
                 case ("temas"):
                     $id = $_GET["id"];
-                    $new = new Temas();
-                    $new->del_tema($id);
-                    $new->return_index();
+                    $borrar = new BaseDatos();                    
+                    $borrar->__set("eliminarTema",$id);
+                    Redirecciones::header("temas");
                     break;
             }
             break;

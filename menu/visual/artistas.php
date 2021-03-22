@@ -1,6 +1,6 @@
 <?php 
 
-include "menu/data/clases/artista.php";
+include "menu/data/basedatos.php";
 
 
 ?>
@@ -18,9 +18,10 @@ include "menu/data/clases/artista.php";
     </tr>
 
     <?php 
-
-        $buscar = new Artista();
-        $listaArtistas = $buscar->__get("mostrarLista");
+        $buscar = new BaseDatos();
+        $listaArtistas = $buscar->__get("artistas");
+        // $buscar = new Artista();
+        // $listaArtistas = $buscar->__get("mostrarLista");
         foreach ($listaArtistas as $key => $artista){
     ?>
 
@@ -36,16 +37,16 @@ include "menu/data/clases/artista.php";
             ></div>
         </td>
 
-        <td class="text-center"><?= $artista["nombre"];?></td>
+        <td class="text-center align-middle"><?= $artista["nombre"];?></td>
                       
-        <td class="text-center"><?= $artista["email"];?></td>                
-        <td class="text-center"><a href="<?= $artista["url"];?>" class="input-text text-nowrap" target="_blank">Sitio web</a></td>
+        <td class="text-center align-middle"><?= $artista["email"];?></td>                
+        <td class="text-center align-middle"><a href="<?= $artista["url"];?>" class="input-text text-nowrap" target="_blank">Sitio web</a></td>
         
         <td class="text-center">            
             
-            <a class="btn btn-success mt-2 pl-4 pr-3" href="index.php?menu=editar&option=artista&id=<?= $artista["ID"];?> ">Editar</a>
+            <a class="btn btn-warning mt-2 pl-4 pr-3" href="index.php?menu=editar&option=artista&id=<?= $artista["ID"];?> ">Editar</a>
             
-            <a class="btn btn-danger mt-2 " href="process.php?action=borrar&opcion=artistas&id=<?= $artista["ID"];?> ">Eliminar</a>         
+            <a class="btn btn-danger  mt-2" href="process.php?action=borrar&opcion=artistas&id=<?= $artista["ID"];?> ">Eliminar</a>         
 
         </td>
     </tr>

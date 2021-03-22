@@ -1,7 +1,6 @@
 <?php 
-include_once "templates/cabecera.php";
+include_once "menu/templates/cabecera.php";
 include_once "funciones/global/conexion.php";
-
 ?>
 
  
@@ -36,15 +35,15 @@ include_once "funciones/global/conexion.php";
                             break;
                         case "agregar":                            
                             if (empty($_GET["option"])){ 
-                                include "tipoCuenta/options.php";
+                                include "menu/formulario/options.php";
                             } else {
                                 $opcion = $_GET["option"];
                                 switch ($opcion){
                                     case "artista": 
-                                        include "tipoCuenta/artistas/add_artista.php";
+                                        include "menu/formulario/artistas/add_artista.php";
                                         break;
                                     case "tema":
-                                        include "tipoCuenta/temas/add_tema.php";
+                                        include "menu/formulario/temas/add_tema.php";
                                         break;
                                 }
                             }
@@ -56,7 +55,10 @@ include_once "funciones/global/conexion.php";
                             $opcion = $_GET["option"];
                             switch ($opcion) {
                                 case ("artista"):
-                                    include "tipoCuenta/artistas/edit_artista.php";
+                                    include "menu/formulario/artistas/edit_artista.php";
+                                    break;
+                                case ("tema"):
+                                    include "menu/formulario/temas/edit_tema.php";
                                     break;
                                 
                             }

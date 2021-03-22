@@ -1,3 +1,4 @@
+<?php include "menu/data/basedatos.php"; ?>
 <div class="p-4">
 
     <div class="container p-4 alert-success text-center ">
@@ -35,17 +36,23 @@
             </select>
         </div>
 
+        <?php 
+            $traer = new BaseDatos();
+            $listaArtistas = $traer->__get("artistas");        
+
+        ?>
         <div class="form-group col-md-3">
             <label  class="col-form-label">Artista</label>
+            
             <select name="idArtista" id="idArtista" class="form-control" tabindex="9">
-                <option>Ariana Grande</option>
-                <option>Maluma</option>
-                <option>Luis Miguel</option>
-                <option>Soledad Pastorutti</option>
-                <option>Ricardo Arjona</option>
+                <?php foreach($listaArtistas as $artista){  ?>
+                
+                    <?= '<option>'.$artista["nombre"].'</option>';?>
+                
+                <?php } ?>
             </select>
+            
         </div>
-
         <div class="col-12  p-3">
             <button class="btn btn-primary" type="submit">Ingresar</button>
         </div>
