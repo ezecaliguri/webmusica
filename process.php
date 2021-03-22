@@ -1,7 +1,6 @@
 <?php 
 include "menu/data/playlist.php";
 include "menu/data/basedatos.php";
-include "funciones/redirecion.php";
 
 
 if(isset($_POST["action"]) || isset($_GET["action"])){
@@ -31,7 +30,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
 
                     $new = new BaseDatos();
                     $new->__set("agregarArtista",$nuevo);
-                    Redirecciones::header("index");               
+                    header("LOCATION: index.php");               
 
                     break;
                 // recibe los datos cambiados del formulario del artista
@@ -45,7 +44,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $cambio = [$id,$nombre,$email,$imagen,$url];
                     $editar = new BaseDatos();
                     $editar->__set("editarArtista",$cambio);
-                    Redirecciones::header("artistas");
+                    header("LOCATION: index.php?menu=artistas");
                     break;
                 
             }
@@ -69,7 +68,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
 
                     $new = new Playlist();
                     $new->set_playlist($id,$nombre,$duracion,$popularidad,$explicidad,$artista);
-                    Redirecciones::header("temas");
+                    header("LOCATION: index.php?menu=temas");
                     break;
                 
                 case ("del"): 
@@ -77,7 +76,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $id = $_POST["id"];
                     $borrar = new Playlist();
                     $borrar->eliminarTemaPlaylist($id);
-                    Redirecciones::header("playlist");
+                    header("LOCATION: index.php?menu=playlist");
                     break;
             }
             
@@ -100,7 +99,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
 
                     $new = new BaseDatos();
                     $new->__set("agregarTema",$nuevo);
-                    Redirecciones::header("index");
+                    header("LOCATION: index.php?menu=temas");
                     break;
                 case ("edit"):
                     $id = $_POST["id"];
@@ -113,7 +112,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
                     $cambio = [$id,$nombre,$duracion,$popularidad,$explicidad,$idArtista];
                     $editar = new BaseDatos();
                     $editar->__set("editarTema",$cambio);
-                    Redirecciones::header("temas");
+                    header("LOCATION: index.php?menu=temas");
                     break;
             }
             break;
@@ -126,7 +125,7 @@ if(isset($_POST["action"]) || isset($_GET["action"])){
         case ("stop"):
             // Destruye la $_SESSION 
             session_destroy();
-            Redirecciones::header("index");
+            header("LOCATION: index.php");
             break;
 
         case ("borrar"):
